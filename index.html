@@ -7,8 +7,38 @@
     <title>My Library</title>
 </head>
 <body>
+    <section id="form-container">
+        <form>
+            <h2>Add Book To Library</h2>
+            <div>
+                <label for="book-title">Book Title:</label>
+                <input type="text" id="book-title" name="book_title" required>
+            </div>
+            <div>
+                <label for="book-author">Book Author:</label>
+                <input type="text" id="book-author" name="book_author" required>
+            </div>
+            <div>
+                <label for="page-count">Page Count:</label>
+                <input type="text" id="page-count" name="page_count" required>
+            </div>
+            <div>
+                <label>Read Status:</label>
+                <select id="read-status" name="read_status">
+                    <option value="true">Read</option>
+                    <option value="false">Not Read</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" id="add-book-btn">
+                    Add Book!
+                </button>
+            </div>
+        </form>
+    </section>
+
     <section id="library-container">
-        
+        <!--Section that d isplays the book cards-->       
     </section>
 </body>
 </html>
