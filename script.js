@@ -1,3 +1,4 @@
+
 let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false },{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false }];
 
 function Book(title, author, pageCount, readStatus) {
@@ -103,8 +104,11 @@ on click dispaly
 
 */
 
-const deleteButton = document.querySelector('#delete-btn');
+const deleteButtonNodes = document.querySelectorAll('#delete-btn');
 
-deleteButton.addEventListener('click', (button) => {
-    console.log('bloo');
-})
+for (let button of deleteButtonNodes) {
+        button.addEventListener('click', (e) => {
+            const test = e.target.parentNode;
+            console.log(test.childNodes[0].innerHTML);
+    })
+}
