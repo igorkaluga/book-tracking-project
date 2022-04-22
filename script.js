@@ -1,6 +1,7 @@
 
 let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false },{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false }];
 
+// Book Object
 function Book(title, author, pageCount, readStatus) {
     this.title = title;
     this.author = author;
@@ -8,15 +9,37 @@ function Book(title, author, pageCount, readStatus) {
     this.readStatus = readStatus;
 };
 
+// Adds book obj to myLibray array
 function addBookToLibrary(book, array) {
     array.push(book);
 };
 
-// DOM
+// Deletes book card element from the DOM
+function deleteBook(target) {
+    if (target.classList.contains('delete')) {
+        target.parentElement.remove();
+    }
+}
+
+// Removes book from the myLibrary array
+function removeBook(target) {
+    let indexNum = target.dataset.indexNumber;
+    /*if (indexNum === 0 || indexNum === 1) {
+        console.log(indexNum);
+        myLibrary.splice(indexNum, 1);
+    } else {
+        console.log(indexNum);
+        indexNum -= 1;
+        myLibrary.splice(indexNum, 1);
+    }*/
+    myLibrary.splice(indexNum, 1);
+}
+
+// Selects the libray container from the DOM
 const libraryContainer = document.querySelector('#library-container');
 
-// CREATES A BOOK CARD
-function createBookCard(book) {
+// Creates book card to display book object
+function createBookCard(book, cardIndex) {
     const bookContainer = document.createElement('div');
     const bookTitle = document.createElement('h2');
     const bookAuthor = document.createElement('p');
@@ -25,6 +48,8 @@ function createBookCard(book) {
     const deleteBtn = document.createElement('button');
 
     deleteBtn.setAttribute('id', 'delete-btn');
+    deleteBtn.setAttribute('class', 'delete');
+    bookContainer.setAttribute('data-index-number', cardIndex);
 
     bookTitle.innerHTML = book.title;
     bookAuthor.innerHTML = book.author;
@@ -40,10 +65,12 @@ function createBookCard(book) {
     libraryContainer.appendChild(bookContainer);
 }
 
-// DISPLAYS EACH BOOK IN THE LIBRARY
+// Displays books in the myLibrary array
 function displayLibray() {
+    let i = 0;
     for (let book of myLibrary) {
-        createBookCard(book);
+        createBookCard(book, i);
+        i++;
     }
 }
 
@@ -56,7 +83,7 @@ function clearForm() {
     document.querySelector('#page-count').value = '';
 }
 
-// ADDS BOOK THROUGH THE FORM
+// Adds books through the form to the myLibrary array and the library container in the DOM
 const submitBookBtn = document.querySelector('#add-book-btn')
 
 submitBookBtn.addEventListener('click', (e) => {
@@ -73,42 +100,31 @@ submitBookBtn.addEventListener('click', (e) => {
     } else {
         const newBook = new Book(bookTitle, bookAuthor, pageCount, readStatus);
 
-        addBookToLibrary(newBook, myLibrary);
+        createBookCard(newBook, (myLibrary.length))
 
-        createBookCard(newBook);
+        addBookToLibrary(newBook, myLibrary);;
 
         clearForm();
     }
 });
 
+// Removes book card from the DOM
+document.querySelector('#library-container').addEventListener('click', (e) => {
+    deleteBook(e.target);
+
+    removeBook(e.target.parentElement);
+})
+
 /*
+    adding a prototype method on the book card to change the read status:
 
-We have an array that stores book objects.
-There is a function that pushes book objects into the array.
+    extend the book constructor and add changeReadStatus prototype.
 
-Run on load to display books already in the array. use local storage:
-    function that loops through the array and displays array objects onto the html doc.
-    create div element -> add array data to div -> append div to index.html
+    const readStatus = (readStatus === true) ? false: true;
 
-add a button that pull up a form.
-    - Check for empty input fields
-    - If empty show error under inut to fill out field
-    - else create book object
-
-adds book to the array ->
-displays the newly added book through createBookCard()
-
-delete button on book card:
-create a function deleteBook
-on click dispaly
 
 */
 
-const deleteButtonNodes = document.querySelectorAll('#delete-btn');
-
-for (let button of deleteButtonNodes) {
-        button.addEventListener('click', (e) => {
-            const test = e.target.parentNode;
-            console.log(test.childNodes[0].innerHTML);
-    })
+Book.prototype.changeReadStatus = function() {
+    readStatus = (this.readStatus === true) ? false : true;
 }
