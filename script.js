@@ -1,13 +1,19 @@
 
-let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false },{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false }];
+let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false, bookID: 0},{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false, bookID: 1}];
 
 // Book Object
-function Book(title, author, pageCount, readStatus) {
+function Book(title, author, pageCount, readStatus, bookID) {
     this.title = title;
     this.author = author;
     this.pageCount = pageCount;
     this.readStatus = readStatus;
+    this.bookID = bookID;
 };
+
+// adds prototype to change the readStatus of books
+Book.prototype.changeReadStatus = function() {
+    this.readStatus = this.readStatus === true ? false : true;
+}
 
 // Adds book obj to myLibray array
 function addBookToLibrary(book, array) {
@@ -23,54 +29,53 @@ function deleteBook(target) {
 
 // Removes book from the myLibrary array
 function removeBook(target) {
-    let indexNum = target.dataset.indexNumber;
-    /*if (indexNum === 0 || indexNum === 1) {
-        console.log(indexNum);
-        myLibrary.splice(indexNum, 1);
-    } else {
-        console.log(indexNum);
-        indexNum -= 1;
-        myLibrary.splice(indexNum, 1);
-    }*/
-    myLibrary.splice(indexNum, 1);
+    let indexNum = Number(target.dataset.bookNumber);
+    // finds the book to remove from myLibrary
+    let removeIndex = myLibrary.findIndex((book) => book.bookID === indexNum);
+    myLibrary.splice(removeIndex, 1);
 }
 
 // Selects the libray container from the DOM
 const libraryContainer = document.querySelector('#library-container');
 
 // Creates book card to display book object
-function createBookCard(book, cardIndex) {
+function createBookCard(book, cardNumber) {
     const bookContainer = document.createElement('div');
     const bookTitle = document.createElement('h2');
     const bookAuthor = document.createElement('p');
     const pageCount = document.createElement('p');
     const readStatus = document.createElement('p');
     const deleteBtn = document.createElement('button');
+    const updateStatus = document.createElement('button');
 
     deleteBtn.setAttribute('id', 'delete-btn');
     deleteBtn.setAttribute('class', 'delete');
-    bookContainer.setAttribute('data-index-number', cardIndex);
+    updateStatus.setAttribute('class', 'update');
+    bookContainer.setAttribute('data-book-number', cardNumber);
 
     bookTitle.innerHTML = book.title;
     bookAuthor.innerHTML = book.author;
     pageCount.innerHTML = book.pageCount;
     readStatus.innerHTML = book.readStatus;
     deleteBtn.innerHTML = "Delete";
+    updateStatus.innerHTML = "Update Read Status";
 
     bookContainer.appendChild(bookTitle);
     bookContainer.appendChild(bookAuthor);
     bookContainer.appendChild(pageCount);
     bookContainer.appendChild(readStatus);
     bookContainer.appendChild(deleteBtn);
+    bookContainer.appendChild(updateStatus);
     libraryContainer.appendChild(bookContainer);
 }
 
+let globalBookID = 0;
+
 // Displays books in the myLibrary array
 function displayLibray() {
-    let i = 0;
     for (let book of myLibrary) {
-        createBookCard(book, i);
-        i++;
+        createBookCard(book, globalBookID);
+        globalBookID++;
     }
 }
 
@@ -98,33 +103,46 @@ submitBookBtn.addEventListener('click', (e) => {
     if (bookTitle === '' || bookAuthor === '' || pageCount === '') {
         window.alert('empty fields!')
     } else {
-        const newBook = new Book(bookTitle, bookAuthor, pageCount, readStatus);
+        const newBook = new Book(bookTitle, bookAuthor, pageCount, Boolean(readStatus), globalBookID);
 
-        createBookCard(newBook, (myLibrary.length))
+        createBookCard(newBook, globalBookID);
 
         addBookToLibrary(newBook, myLibrary);;
 
         clearForm();
+
+        globalBookID++;
     }
 });
 
 // Removes book card from the DOM
 document.querySelector('#library-container').addEventListener('click', (e) => {
     deleteBook(e.target);
-
     removeBook(e.target.parentElement);
+    // bug: deletes target item from myLibray array
+    updateStatus(e.target);
 })
 
-/*
-    adding a prototype method on the book card to change the read status:
 
-    extend the book constructor and add changeReadStatus prototype.
-
-    const readStatus = (readStatus === true) ? false: true;
-
-
-*/
-
-Book.prototype.changeReadStatus = function() {
-    readStatus = (this.readStatus === true) ? false : true;
+// NEEDS TO FIX
+function updateStatus(target) {
+    let indexNum = target.parentElement.dataset.bookNumber;
+    if (target.classList.contains('update')) {
+        console.log('update status being called')
+        myLibrary[indexNum].changeReadStatus();
+    }
 }
+
+/*
+===============================================================
+adding a prototype method on the book card to change the read status:
+
+extend the book constructor and add changeReadStatus prototype.
+
+const readStatus = (readStatus === true) ? false: true;
+
+updateStatus(target) {
+    find index
+    myLibrary[index].changeReadStatus();
+}
+*/
