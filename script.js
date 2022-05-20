@@ -135,6 +135,7 @@ function updateStatus(target) {
     let indexNum = target.parentElement.dataset.bookNumber;
     if (target.classList.contains('update')) {
         myLibrary[indexNum].changeReadStatus();
+        target.previousSibling.previousSibling.innerHTML = myLibrary[indexNum].readStatus;
     }
 }
 
@@ -150,8 +151,6 @@ extend the book constructor and add changeReadStatus prototype.
 
 const readStatus = (readStatus === true) ? false: true;
 
-updateStatus(target) {
-    find index
-    myLibrary[index].changeReadStatus();
-}
+need to update DOM object to match updated status.
+select the read-status field of the book container and set inner html to match the myLibrary objects readStatus??
 */
