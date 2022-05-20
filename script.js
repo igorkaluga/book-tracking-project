@@ -1,6 +1,10 @@
 
 let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false, bookID: 0},{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false, bookID: 1}];
 
+// working with the changeReadStatusPrototype and myLibrary array
+let bookOne = new Book('Something Somehting', 'J.R.R Tolken', 263, 'False', 3);
+myLibrary.push(bookOne);
+
 // Book Object
 function Book(title, author, pageCount, readStatus, bookID) {
     this.title = title;
@@ -117,10 +121,12 @@ submitBookBtn.addEventListener('click', (e) => {
 
 // Removes book card from the DOM
 document.querySelector('#library-container').addEventListener('click', (e) => {
-    deleteBook(e.target);
-    removeBook(e.target.parentElement);
-    // bug: deletes target item from myLibray array
-    updateStatus(e.target);
+    if (e.target.classList.contains('delete')) {
+        deleteBook(e.target);
+        removeBook(e.target.parentElement);
+    } else if (e.target.classList.contains('update')) {
+        updateStatus(e.target);
+    }
 })
 
 
@@ -128,12 +134,15 @@ document.querySelector('#library-container').addEventListener('click', (e) => {
 function updateStatus(target) {
     let indexNum = target.parentElement.dataset.bookNumber;
     if (target.classList.contains('update')) {
-        console.log('update status being called')
         myLibrary[indexNum].changeReadStatus();
     }
 }
 
 /*
+===============================================================
+BUGS
+Drop down value for read status is always true.
+
 ===============================================================
 adding a prototype method on the book card to change the read status:
 
