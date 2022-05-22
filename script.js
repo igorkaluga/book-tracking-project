@@ -102,12 +102,15 @@ submitBookBtn.addEventListener('click', (e) => {
     const bookAuthor = document.querySelector('#book-author').value;
     const pageCount = document.querySelector('#page-count').value;
     const readStatus = document.querySelector('#read-status').value;
+    
+    readStatus === "true" ? true: false;
+
 
     // Validates form input. If empty input then display error.
     if (bookTitle === '' || bookAuthor === '' || pageCount === '') {
         window.alert('empty fields!')
     } else {
-        const newBook = new Book(bookTitle, bookAuthor, pageCount, Boolean(readStatus), globalBookID);
+        const newBook = new Book(bookTitle, bookAuthor, pageCount, readStatus, globalBookID);
 
         createBookCard(newBook, globalBookID);
 
@@ -139,18 +142,3 @@ function updateStatus(target) {
     }
 }
 
-/*
-===============================================================
-BUGS
-Drop down value for read status is always true.
-
-===============================================================
-adding a prototype method on the book card to change the read status:
-
-extend the book constructor and add changeReadStatus prototype.
-
-const readStatus = (readStatus === true) ? false: true;
-
-need to update DOM object to match updated status.
-select the read-status field of the book container and set inner html to match the myLibrary objects readStatus??
-*/
