@@ -50,21 +50,54 @@ table {
 
 /* PAGE CSS */
 
+
 #site-name {
-    text-align: center;
+	text-align: center;
     font-size: 40px;
 }
 
+/* Form Container */ 
+
+#form-container {
+	background-color: antiquewhite;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	width: 350px;
+}
+
+#form-container form div {
+	display: flex;
+	padding: 0px 20px;
+	flex-flow: column wrap;
+}
 
 /* Libray Container */
 
 #library-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: auto;    
-    width: 80%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 20px;  
+	height: auto;
+	transform: translateX(350px);
+	width: calc(100vw - 350px);
 }
 
+/* Book Container */
+
 #library-container div {
+	background-color: lightblue;
+	height: 100vh;
+	height: auto;
+	padding: 20px 0px;
     text-align: center;
+}
+
+#library-container div h2 {
+	font-size: 36px;
+	padding-bottom: 10px;
+}
+
+#library-container div p {
+	font-size: 18px;
 }

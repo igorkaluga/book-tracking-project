@@ -1,4 +1,3 @@
-
 let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false, bookID: 0},{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false, bookID: 1}];
 
 // working with the changeReadStatusPrototype and myLibrary array
@@ -59,7 +58,7 @@ function createBookCard(book, cardNumber) {
 
     bookTitle.innerHTML = book.title;
     bookAuthor.innerHTML = book.author;
-    pageCount.innerHTML = book.pageCount;
+    pageCount.innerHTML = `${book.pageCount} Pages`;
     readStatus.innerHTML = book.readStatus;
     deleteBtn.innerHTML = "Delete";
     updateStatus.innerHTML = "Update Read Status";
