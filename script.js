@@ -1,3 +1,4 @@
+// This array stores all of the book objects
 let myLibrary = [{title:'The Hobbit', author: 'J.R.R Tolken', pageCount: 263, readStatus: false, bookID: 0},{title:'Airplane', author: 'A320', pageCount: 777, readStatus: false, bookID: 1}];
 
 // working with the changeReadStatusPrototype and myLibrary array
@@ -23,6 +24,7 @@ function addBookToLibrary(book, array) {
     array.push(book);
 };
 
+// BOOK DELETION
 // Deletes book card element from the DOM
 function deleteBook(target) {
     if (target.classList.contains('delete')) {
@@ -38,6 +40,8 @@ function removeBook(target) {
     myLibrary.splice(removeIndex, 1);
 }
 
+//==========================================
+// DOM SET UP AND CREATION FOR EACH BOOK
 // Selects the libray container from the DOM
 const libraryContainer = document.querySelector('#library-container');
 
@@ -132,7 +136,8 @@ document.querySelector('#library-container').addEventListener('click', (e) => {
 })
 
 
-// NEEDS TO FIX
+// NEED TO FIX
+// -- if the book status is originally true, it takes 2 clicks to change it to false. If the book status is originally false then it takes one click.
 function updateStatus(target) {
     let indexNum = target.parentElement.dataset.bookNumber;
     if (target.classList.contains('update')) {

@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	text-transform: uppercase;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -50,12 +51,6 @@ table {
 
 /* PAGE CSS */
 
-
-#site-name {
-	text-align: center;
-    font-size: 40px;
-}
-
 /* Form Container */ 
 
 #form-container {
@@ -66,17 +61,52 @@ table {
 	width: 350px;
 }
 
+#site-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+	background-color: seagreen;
+}
+
+#site-name {
+	text-align: center;
+    font-size: 40px;
+}
+
+#form-container form {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 100px);
+	padding: 0px 20px;
+	row-gap: 20px;
+}
+
+#form-container form h2 {
+	font-size: 22px;
+}
+
 #form-container form div {
 	display: flex;
-	padding: 0px 20px;
 	flex-flow: column wrap;
+	width: 100%;
+}
+
+#form-container form div button {
+	justify-content: center;
+	width: 200px;
+	height: 40px;
+	margin: auto;
+	text-transform: uppercase;
 }
 
 /* Libray Container */
 
 #library-container {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 20px;  
 	height: auto;
 	transform: translateX(350px);
