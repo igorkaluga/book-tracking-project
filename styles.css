@@ -59,6 +59,7 @@ table {
 	position: fixed;
 	top: 0;
 	width: 350px;
+	border-right: 2px solid black;
 }
 
 #site-header {
@@ -94,6 +95,18 @@ table {
 	width: 100%;
 }
 
+#form-container form div label {
+	padding-bottom: 5px;
+}
+
+#form-container form div input {
+	padding: 10px;
+	background-color: white;
+	border: 1.5px solid black;
+	border-radius: 5px;
+	box-shadow: none;
+}
+
 #form-container form div button {
 	justify-content: center;
 	width: 200px;
@@ -105,29 +118,41 @@ table {
 /* Libray Container */
 
 #library-container {
+	padding: 20px;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	justify-items: center;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 	grid-gap: 20px;  
 	height: auto;
 	transform: translateX(350px);
-	width: calc(100vw - 350px);
+	width: calc(100vw - 390px);
 }
 
 /* Book Container */
 
 #library-container div {
 	background-color: lightblue;
-	height: 100vh;
-	height: auto;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column wrap;
+	text-align: center;
+	
+	height: 30vh;
+	min-width: 350px;
 	padding: 20px 0px;
-    text-align: center;
+
+	border: 2px solid black;
+	border-radius: 20px;
 }
 
 #library-container div h2 {
 	font-size: 36px;
-	padding-bottom: 10px;
+	padding: 0px 10px 10px 10px;
 }
 
 #library-container div p {
 	font-size: 18px;
+	padding-bottom: 10px;
 }
