@@ -54,7 +54,7 @@ table {
 /* Form Container */ 
 
 #form-container {
-	background-color: antiquewhite;
+	background-color: aliceblue;
 	height: 100vh;
 	position: fixed;
 	top: 0;
@@ -67,18 +67,19 @@ table {
 	align-items: center;
 	justify-content: center;
 	height: 100px;
-	background-color: seagreen;
 }
 
 #site-name {
 	text-align: center;
-    font-size: 40px;
+	font-size: 40px;
+	font-family: 'Roboto', sans-serif;
+	font-style: italic;
+	font-weight: 900;
 }
 
 #form-container form {
 	display: flex;
 	flex-flow: column wrap;
-	align-items: center;
 	justify-content: center;
 	height: calc(100vh - 100px);
 	padding: 0px 20px;
@@ -87,6 +88,7 @@ table {
 
 #form-container form h2 {
 	font-size: 22px;
+	font-family: 'Roboto', sans-serif;
 }
 
 #form-container form div {
@@ -97,6 +99,8 @@ table {
 
 #form-container form div label {
 	padding-bottom: 5px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
 }
 
 #form-container form div input {
@@ -105,6 +109,8 @@ table {
 	border: 1.5px solid black;
 	border-radius: 5px;
 	box-shadow: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
 }
 
 #form-container form div button {
@@ -131,7 +137,7 @@ table {
 /* Book Container */
 
 #library-container div {
-	background-color: lightblue;
+	background-color: aliceblue;
 
 	display: flex;
 	justify-content: center;
@@ -150,9 +156,13 @@ table {
 #library-container div h2 {
 	font-size: 36px;
 	padding: 0px 10px 10px 10px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
 }
 
 #library-container div p {
 	font-size: 18px;
 	padding-bottom: 10px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 }
