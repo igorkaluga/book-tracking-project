@@ -1,6 +1,6 @@
 This is a simple book library project.
 
-You can add a book to your library along with: author, pages, read stutas.
+You can add a book to your library along with: author, pages, read status.
 After the book has been added you can delete it from your library or update it's read status.
 
 Still currently in the works.
